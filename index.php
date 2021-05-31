@@ -23,7 +23,7 @@ for(var i=0;i<test['cname'].length;i++){
 //	$("#preview").prepend('<br>'+test['cname'][i]);
 	
 		var clone = $("#mainbase .item").clone().attr('id',test['cname'][i]);
-    $(".title", clone).html('<a target="_blank" href="' + test['cname'][i] +'">'+test['cname'][i]+'</a>')
+    $(".title", clone).html('<table><tr><td><a target="_blank" href="' + test['cname'][i] +'">'+test['cname'][i]+'</a></td><td>'+test['trend'][test['cname'][i]]+'</td></tr></table>')
 	var table_body="";
 	
 	for(var j=0;j<test['cdate'].length;j++){
@@ -38,7 +38,7 @@ for(var i=0;i<test['cname'].length;i++){
 			}
 			
 	quantity=squantity();
-	$(".mytable", clone).html('<table border="1" class="'+test['cname'][i]+i+'"><thead><th>'+test['openprize'][test['cname'][i]][0]+'</th>	&nbsp;<th>'+quantity+'</th><th>Gain %</th><th>Lavg.</th><th></th>'+table_body+'</thead></table>')
+	$(".mytable", clone).html('<table border="1" class="'+test['cname'][i]+i+'"><thead><th>'+test['openprize'][test['cname'][i]][0]+'</th>	&nbsp;<th>'+quantity+'</th><th>Gain %</th><th>Lavg.</th><th style="background-color:#82F6C9 ">&nbsp;</th>'+table_body+'</thead></table>')
 	$(".myCharttable", clone).html('<table  style="width: 100%;" class="'+test['cname'][i]+i+'1"><thead><th></th><th><canvas id="'+test['cname'][i]+i+'myChart" style="max-width:350px"></canvas></th><th><canvas id="'+test['cname'][i]+i+i+'myChart1" style="max-width:350px"></canvas></th></thead></table>')
 	$(".myCharttable1", clone).html('<table  style="width: 100%;" class="'+test['cname'][i]+i+'2"><thead><th></th><th><canvas id="'+test['cname'][i]+i+i+'myChart2" style="max-width:350px"></canvas></th><th><canvas id="'+test['cname'][i]+'openprize" style="max-width:350px"></canvas></th></thead></table>')
 	

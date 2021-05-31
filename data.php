@@ -53,10 +53,80 @@ function c2cavg($res){
 function openprize($res){
 	$d=array();
 	for ($i=0;$i<15;$i++) {
-		$d[]=$res[$i]['sclose'];
+		$d[]=$res[$i]['sopen'];
 	}
 	return $d;
 }
+	function trand($arr) {
+$a=$arr[0]>$arr[1];
+$b=$arr[1]>$arr[2];
+$c=$arr[2]>$arr[3];
+$d=$arr[3]>$arr[4];
+$tr=0;
+if($a){
+if($b){
+if($c){
+		if($d){
+			$tr=16;
+		}else{
+			$tr=12;
+		}
+}else {
+	if($d){
+			$tr=13;
+		}else{
+		$tr=4;
+		}
+}
+}else{
+if($c){
+		if($d){
+			$tr=14;
+		}else{
+			$tr=7;
+		}
+}else {
+	if($d){
+			$tr=8;
+		}else{
+			$tr=2;
+		}
+}
+}
+}else{
+if($b){
+if($c){
+		if($d){
+			$tr=15;
+		}else{
+			$tr=10;
+		}
+}else {
+		if($d){
+			$tr=9;
+		}else{
+			$tr=3;
+		}
+}
+}else{
+if($c){
+		if($d){
+			$tr=11;
+		}else{
+			$tr=5;
+		}
+}else {
+		if($d){
+			$tr=6;
+		}else{
+			$tr=1;
+		}
+}
+}
+} 
+return "$tr";
+
+	}
 
 
 function dataant(){
@@ -69,6 +139,7 @@ $open2open=array();
 $cmnames=array();
 $c2cmavg=array();
 $c2cavg=array();
+$ctrand=array();
 $openprize=array();
 for ($x = 0; $x < count($urls[0]); $x++) {
 	#$d=array(); print_r($urls[0][0]);echo "<br>";
@@ -89,6 +160,7 @@ $close2close[$name]=close2close($arr);
 $open2open[$name]=open2open($arr);
 $c2cmavg[$name]=c2cmavg($arr);
 $c2cavg[$name]=c2cavg(close2close($arr));
+$ctrand[$name]=trand($c2cavg[$name]);
 $openprize[$name]=openprize($arr);
 }
 
@@ -97,7 +169,7 @@ $final['close2open']=$close2open;
 $final['open2close']=$open2close;
 $final['close2close']=$close2close;
 $final['open2open']=$open2open;
-$final['cname']=array_keys($close2open);
+
 
 
  $arr9=array();
@@ -111,8 +183,11 @@ $str="SELECT sdate FROM `BAJFINANCE`";
 	$final['cdate']=array_slice($arr9,0,15);
 $final['c2cmavg']=$c2cmavg;	
 $final['c2cavg']=$c2cavg;
-$final['openprize']=$openprize;	
-		
+$final['openprize']=$openprize;
+arsort($ctrand);
+$final['cname']=array_keys($ctrand);
+$final['trend']=$ctrand;	
+	
 echo json_encode($final); 
 }
 
